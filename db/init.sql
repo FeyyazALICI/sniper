@@ -34,12 +34,12 @@ ALTER TABLE weapon_feedback
 	ADD CONSTRAINT fk_weapon_feedback_weapon
 		FOREIGN KEY (weapon_id)
 		REFERENCES weapon(id);
-INSERT INTO weapon (weapon_id, user_comment)
+INSERT INTO weapon_feedback (weapon_id, user_comment)
 VALUES 
 (1, 		'A reliable rifle with decent accuracy & destructive power. Excellent at using slugs, not recommended for bellet shots'),
-(2, 		''),
-(3, 		''),
-(4, 		'')
+(2, 		'Hunting rifle for small games, reliable with 2 triggers. Best for pellet shots, not recommended for slug shooting.'),
+(3, 		'Semi authomatic shutgun, reliable enough with 30 gr or heavier ammo. Accuracy is decent. Decent with slugs, not recommended with pellets.'),
+(4, 		'Air bolt rifle. A decent price-performance item. Decent accuracy at small ranges.')
 ;
 
 # iteration
@@ -62,10 +62,10 @@ INSERT INTO shooting (distance, distance_category, weapon_id, shot_fired, hit, d
 VALUES
 (5, 	'short',		4,  4, 4, '2025-05-07'),
 (10, 	'medium',		4,  4, 4, '2025-05-07'),
-(15, 	'medium',		4,  3, 4, '2025-05-07')
+(15, 	'long',			4,  3, 4, '2025-05-07')
 ;
 
-# creating combined view
+# creating combined view of shoting & weapon tables
 CREATE VIEW shooting_with_weapon AS
 SELECT 
     s.id 					AS shooting_id,
@@ -86,6 +86,19 @@ INNER JOIN
 	weapon w 
     ON 
     s.weapon_id = w.id
+;
+
+# creating combined view of weapon & weapon_feedback tables
+CREATE VIEW weapon_with_feedback AS
+SELECT 
+    w.id 					AS id,
+    w.brand 				AS brand,
+    f.user_comment			AS user_comment
+FROM weapon w
+INNER JOIN 
+		weapon_feedback f 
+    ON 
+		w.id = f.id
 ;
     
 # SELECT * FROM cat_with_price;
@@ -114,6 +127,25 @@ VALUES
 ('?', 						'l-0', 			4.5, 	'mm',		'air-bolt',				null)
 ;
 
+#def
+CREATE TABLE weapon_feedback(
+	id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    weapon_id				BIGINT,
+    user_comment			TEXT
+);
+ALTER TABLE weapon_feedback MODIFY COLUMN id BIGINT AUTO_INCREMENT;
+ALTER TABLE weapon_feedback
+	ADD CONSTRAINT fk_weapon_feedback_weapon
+		FOREIGN KEY (weapon_id)
+		REFERENCES weapon(id);
+INSERT INTO weapon_feedback (weapon_id, user_comment)
+VALUES 
+(1, 		'A reliable rifle with decent accuracy & destructive power. Excellent at using slugs, not recommended for bellet shots'),
+(2, 		'Hunting rifle for small games, reliable with 2 triggers. Best for pellet shots, not recommended for slug shooting.'),
+(3, 		'Semi authomatic shutgun, reliable enough with 30 gr or heavier ammo. Accuracy is decent. Decent with slugs, not recommended with pellets.'),
+(4, 		'Air bolt rifle. A decent price-performance item. Decent accuracy at small ranges.')
+;
+
 # iteration
 CREATE TABLE shooting(
 id BIGINT AUTO_INCREMENT PRIMARY KEY,
@@ -134,10 +166,10 @@ INSERT INTO shooting (distance, distance_category, weapon_id, shot_fired, hit, d
 VALUES
 (5, 	'short',		4,  4, 4, '2025-05-07'),
 (10, 	'medium',		4,  4, 4, '2025-05-07'),
-(15, 	'medium',		4,  3, 4, '2025-05-07')
+(15, 	'long',			4,  3, 4, '2025-05-07')
 ;
 
-# creating combined view
+# creating combined view of shoting & weapon tables
 CREATE VIEW shooting_with_weapon AS
 SELECT 
     s.id 					AS shooting_id,
@@ -160,6 +192,18 @@ INNER JOIN
     s.weapon_id = w.id
 ;
 
+# creating combined view of weapon & weapon_feedback tables
+CREATE VIEW weapon_with_feedback AS
+SELECT 
+    w.id 					AS id,
+    w.brand 				AS brand,
+    f.user_comment			AS user_comment
+FROM weapon w
+INNER JOIN 
+		weapon_feedback f 
+    ON 
+		w.id = f.id
+;
 
 # PRIVILEGES -----------------------------------------------------------------------------------------
 CREATE USER IF NOT EXISTS 'myuser'@'%' IDENTIFIED BY 'Light80s!';
