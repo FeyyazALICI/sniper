@@ -6,49 +6,159 @@ import com.sniper.def.components.dao.entity.Weapon;
 public class WeaponMapper {
     
 
-    public Weapon entityToDTOMapper( WeaponDTO weaponDTO ){
+    public Weapon DTOtoEntityMapper( WeaponDTO weaponDTO ){
         
+        // attributes
         Long id = null;
+
+        String brand = null;
+        String serialNumber = null;
+        String boreSize = null;
+        String boreUnit = null;
+        String type = null;
+
+        String photoQr = null;
+
+        // transformation   ----------------------------------------------------------------
+        // id
         if( weaponDTO.getId()==null || ( weaponDTO.getId().trim().equals("") ) ){
             id = null;
         }else{
             id = Long.parseLong(weaponDTO.getId());
         }
 
-        String name = null;
-        if( catDTO.getName()==null || ( catDTO.getName().trim().equals("") )){
-            name = null;
+        // brand
+        if( weaponDTO.getBrand()==null || ( weaponDTO.getBrand().trim().equals("") )){
+            brand = null;
         }else{
-            name = catDTO.getName();
+            brand = weaponDTO.getBrand();
         }
 
-        BigDecimal weight = null;
-        if( catDTO.getWeight()==null || ( catDTO.getWeight().trim().equals("") )){
-            weight = null;
+        // serialNumber
+        if( weaponDTO.getSerialNumber()==null || ( weaponDTO.getSerialNumber().trim().equals("") )){
+            serialNumber = null;
         }else{
-            weight = new BigDecimal(catDTO.getWeight()) ;
+            serialNumber = weaponDTO.getSerialNumber();
         }
 
-        Cat cat = new Cat();
-        cat.setId(id);
-        cat.setName(name);
-        cat.setWeight(weight);
+        // boreSize
+        if( weaponDTO.getBoreSize()==null || ( weaponDTO.getBoreSize().trim().equals("") )){
+            boreSize = null;
+        }else{
+            boreSize = weaponDTO.getBoreSize();
+        }
 
-        return cat;
+        // boreUnit
+        if( weaponDTO.getBoreUnit()==null || ( weaponDTO.getBoreUnit().trim().equals("") )){
+            boreUnit = null;
+        }else{
+            boreUnit = weaponDTO.getBoreUnit();
+        }
+
+        // type
+        if( weaponDTO.getType()==null || ( weaponDTO.getType().trim().equals("") )){
+            type = null;
+        }else{
+            type = weaponDTO.getType();
+        }
+
+        // photoQr
+        if( weaponDTO.getPhotoQr()==null || ( weaponDTO.getPhotoQr().trim().equals("") )){
+            photoQr = null;
+        }else{
+            photoQr = weaponDTO.getPhotoQr();
+        }
+
+        // Entity creation
+        Weapon weapon = new Weapon();
+        weapon.setId(id);
+
+        weapon.setBrand(brand);
+        weapon.setSerialNumber(serialNumber);
+        weapon.setBoreSize(boreSize);
+        weapon.setBoreUnit(boreUnit);
+        weapon.setType(type);
+
+        weapon.setPhotoQr(photoQr);
+        return weapon;
     }
 
-    public CatDTO catToCatDTOMapper( Cat cat ){
+    public WeaponDTO entityToDTOMapper( Weapon weapon ){
         
-        String id = cat.getId().toString();
-        String name = cat.getName();
-        String weight = cat.getWeight().toString();
+        // attributes
+        String id = null;
 
-        CatDTO catDTO = new CatDTO();
-        catDTO.setId(id);
-        catDTO.setName(name);
-        catDTO.setWeight(weight);
+        String brand = null;
+        String serialNumber = null;
+        String boreSize = null;
+        String boreUnit = null;
+        String type = null;
 
-        return catDTO;
+        String photoQr = null;
+
+        // transformation   ----------------------------------------------------------------
+        // id
+        if(   weapon.getId()==null   ){
+            id = null;
+        }else{
+            id = weapon.getId().toString();
+        }
+
+        // brand
+        if(   weapon.getBrand()==null || weapon.getBrand().trim().equals("")   ){
+            brand = null;
+        }else{
+            brand = weapon.getBrand();
+        }
+        
+        // serialNumber
+        if(   weapon.getSerialNumber()==null || weapon.getSerialNumber().trim().equals("")   ){
+            serialNumber = null;
+        }else{
+            serialNumber = weapon.getSerialNumber();
+        }
+
+        // boreSize
+        if(   weapon.getBoreSize()==null || weapon.getBoreSize().trim().equals("")   ){
+            boreSize = null;
+        }else{
+            boreSize = weapon.getBoreSize();
+        }
+
+        // boreUnit
+        if(   weapon.getBoreUnit()==null || weapon.getBoreUnit().trim().equals("")   ){
+            boreUnit = null;
+        }else{
+            boreUnit = weapon.getBoreUnit();
+        }
+
+        // type
+        if(   weapon.getType()==null || weapon.getType().trim().equals("")   ){
+            type = null;
+        }else{
+            type = weapon.getType();
+        }
+
+        // photoQr
+        if(   weapon.getPhotoQr()==null || weapon.getPhotoQr().trim().equals("")   ){
+            photoQr = null;
+        }else{
+            photoQr = weapon.getPhotoQr();
+        }
+
+        // Entity creation
+        WeaponDTO weaponDTO = new WeaponDTO();
+        weaponDTO.setId(id);
+
+        weaponDTO.setBrand(brand);
+        weaponDTO.setSerialNumber(serialNumber);
+        weaponDTO.setBoreSize(boreSize);
+        weaponDTO.setBoreUnit(boreUnit);
+        weaponDTO.setType(type);
+
+        weaponDTO.setPhotoQr(photoQr);
+        return weaponDTO;
     }
     
 }
+

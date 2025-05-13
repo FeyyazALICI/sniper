@@ -20,7 +20,7 @@ VALUES
 ('HATSAN ESCORT MAGNUM', 	'19-687616', 	12, 	'gauge', 	'pump-action',			null),
 ('HUGLU', 					'21C1225', 		12, 	'gauge',	'double-barelled',		null),
 ('HATSAN', 					'17-463388', 	12, 	'gauge',	'semi-authomatic',		null),
-('?', 						'l-0', 			4.5, 	'mm',		'air-bolt',				null)
+('SOCOM-TACTICAL', 			'l-0', 			4.5, 	'mm',		'air-bolt',				null)
 ;
 
 #def
@@ -62,7 +62,10 @@ INSERT INTO shooting (distance, distance_category, weapon_id, shot_fired, hit, d
 VALUES
 (5, 	'short',		4,  4, 4, '2025-05-07'),
 (10, 	'medium',		4,  4, 4, '2025-05-07'),
-(15, 	'long',			4,  3, 4, '2025-05-07')
+(15, 	'long',			4,  3, 4, '2025-05-07'),
+(15, 	'long',			4,  5, 4, '2025-05-13'),
+(10, 	'medium',		4,  15, 12, '2025-05-13'),
+(5, 	'short',		4,  15, 14, '2025-05-13')
 ;
 
 # creating combined view of shoting & weapon tables
@@ -124,7 +127,7 @@ VALUES
 ('HATSAN ESCORT MAGNUM', 	'19-687616', 	12, 	'gauge', 	'pump-action',			null),
 ('HUGLU', 					'21C1225', 		12, 	'gauge',	'double-barelled',		null),
 ('HATSAN', 					'17-463388', 	12, 	'gauge',	'semi-authomatic',		null),
-('?', 						'l-0', 			4.5, 	'mm',		'air-bolt',				null)
+('SOCOM-TACTICAL', 			'l-0', 			4.5, 	'mm',		'air-bolt',				null)
 ;
 
 #def
