@@ -7,7 +7,7 @@ USE SNIPER_DB;
 CREATE TABLE weapon(
 id BIGINT AUTO_INCREMENT PRIMARY KEY,
 brand 			VARCHAR(255),
-serial_number 	VARCHAR(255),
+serial_number 	VARCHAR(255)	UNIQUE,
 bore_size		DECIMAL(5,2),
 bore_unit	 	VARCHAR(255),
 type		 	VARCHAR(255),
@@ -26,7 +26,7 @@ VALUES
 #def
 CREATE TABLE weapon_feedback(
 	id BIGINT AUTO_INCREMENT PRIMARY KEY,
-    weapon_id				BIGINT,
+    weapon_id				BIGINT	UNIQUE,
     user_comment			TEXT
 );
 ALTER TABLE weapon_feedback MODIFY COLUMN id BIGINT AUTO_INCREMENT;
@@ -114,7 +114,7 @@ USE SNIPER_DB_TEST;
 CREATE TABLE weapon(
 id BIGINT AUTO_INCREMENT PRIMARY KEY,
 brand 			VARCHAR(255),
-serial_number 	VARCHAR(255),
+serial_number 	VARCHAR(255)	UNIQUE,
 bore_size		DECIMAL(5,2),
 bore_unit	 	VARCHAR(255),
 type		 	VARCHAR(255),
@@ -133,7 +133,7 @@ VALUES
 #def
 CREATE TABLE weapon_feedback(
 	id BIGINT AUTO_INCREMENT PRIMARY KEY,
-    weapon_id				BIGINT,
+    weapon_id				BIGINT	UNIQUE,
     user_comment			TEXT
 );
 ALTER TABLE weapon_feedback MODIFY COLUMN id BIGINT AUTO_INCREMENT;
@@ -214,3 +214,6 @@ GRANT ALL PRIVILEGES ON SNIPER_DB.*	 		TO 		'myuser'@'%';
 GRANT ALL PRIVILEGES ON SNIPER_DB_TEST.* 	TO		 'myuser'@'%';
 FLUSH PRIVILEGES;
 COMMIT;
+
+USE SNIPER_DB;
+SELECT * FROM WEAPON;
