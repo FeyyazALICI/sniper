@@ -1,11 +1,12 @@
-package com.sniper.def.components.api.controller.view;
+package com.sniper.fileandbatch.components.file.api.controller;
+
 
 import org.springframework.web.bind.annotation.RestController;
 
-import com.sniper.def.common.responseReturns.HttpHeaderCreator;
-import com.sniper.def.components.api.controllerInterface.view.ViewControllerInterface;
-import com.sniper.def.components.bussiness.dto.view.ShootingWithWeaponDTO;
-import com.sniper.def.components.bussiness.service.view.ViewService;
+import com.sniper.fileandbatch.common.HttpHeaderCreator;
+import com.sniper.fileandbatch.components.file.api.controllerInterface.ViewControllerInterface;
+import com.sniper.fileandbatch.components.file.bussiness.dto.ShootingWithWeaponDTO;
+import com.sniper.fileandbatch.components.file.bussiness.service.ViewService;
 
 import jakarta.servlet.http.HttpServletRequest;
 
@@ -57,7 +58,7 @@ public class ViewController implements ViewControllerInterface{
     @Override
     @PostMapping("/swwv/id")
     public ResponseEntity getShootingWithWeaponById(HttpServletRequest request, @RequestBody HashMap<String, String> dataReceived   ){
-        String requestType = "POST";
+        String requestType = "GET";
         try{
             Long id = Long.valueOf(dataReceived.get("id"));
             ShootingWithWeaponDTO data = viewService.getShootingWithWeaponById(   id   );

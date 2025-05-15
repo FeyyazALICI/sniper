@@ -1,4 +1,5 @@
-package com.sniper.def.components.bussiness.service.view;
+package com.sniper.fileandbatch.components.file.bussiness.service;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,11 +7,12 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
-import com.sniper.def.components.bussiness.dto.view.ShootingWithWeaponDTO;
-import com.sniper.def.components.bussiness.dtoMapper.view.ShootingWithWeaponMapper;
-import com.sniper.def.components.bussiness.serviceInterface.view.ShootingWithWeaponIdInterface;
-import com.sniper.def.components.dao.entity.view.ShootingWithWeapon;
-import com.sniper.def.components.dao.repository.view.ShootingWithWeaponRepo;
+import com.sniper.fileandbatch.components.file.bussiness.dto.ShootingWithWeaponDTO;
+import com.sniper.fileandbatch.components.file.bussiness.dtoMapper.ShootingWithWeaponMapper;
+import com.sniper.fileandbatch.components.file.bussiness.serviceInterface.ShootingWithWeaponIdInterface;
+import com.sniper.fileandbatch.components.file.dao.entity.ShootingWithWeapon;
+import com.sniper.fileandbatch.components.file.dao.repository.ShootingWithWeaponRepo;
+
 
 @Service
 public class ViewService implements ShootingWithWeaponIdInterface{

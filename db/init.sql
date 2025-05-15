@@ -68,6 +68,13 @@ VALUES
 (5, 	'short',		4,  15, 14, '2025-05-13')
 ;
 
+# batch table
+CREATE TABLE days_without_shooting(
+id BIGINT AUTO_INCREMENT PRIMARY KEY,
+date_of_rest	DATE
+);
+ALTER TABLE days_without_shooting MODIFY COLUMN id BIGINT AUTO_INCREMENT;
+
 # creating combined view of shoting & weapon tables
 CREATE VIEW shooting_with_weapon AS
 SELECT 
@@ -171,6 +178,13 @@ VALUES
 (10, 	'medium',		4,  4, 4, '2025-05-07'),
 (15, 	'long',			4,  3, 4, '2025-05-07')
 ;
+
+# batch table
+CREATE TABLE days_without_shooting(
+id BIGINT AUTO_INCREMENT PRIMARY KEY,
+date_of_rest	DATE
+);
+ALTER TABLE days_without_shooting MODIFY COLUMN id BIGINT AUTO_INCREMENT;
 
 # creating combined view of shoting & weapon tables
 CREATE VIEW shooting_with_weapon AS

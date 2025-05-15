@@ -1,8 +1,8 @@
-package com.sniper.def.components.bussiness.serviceInterface.view;
+package com.sniper.fileandbatch.components.file.bussiness.serviceInterface;
 
 import java.util.List;
 
-import com.sniper.def.components.bussiness.dto.view.ShootingWithWeaponDTO;
+import com.sniper.fileandbatch.components.file.bussiness.dto.ShootingWithWeaponDTO;
 
 public interface ShootingWithWeaponIdInterface {
     
