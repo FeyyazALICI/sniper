@@ -98,6 +98,12 @@ INNER JOIN
     s.weapon_id = w.id
 ;
 
+SELECT MIN(date_of_shooting) AS earliest_date
+FROM shooting_with_weapon;
+
+SELECT * FROM days_without_shooting ORDER BY date_of_rest DESC;
+SELECT * FROM shooting_with_weapon;
+
 # creating combined view of weapon & weapon_feedback tables
 CREATE VIEW weapon_with_feedback AS
 SELECT 

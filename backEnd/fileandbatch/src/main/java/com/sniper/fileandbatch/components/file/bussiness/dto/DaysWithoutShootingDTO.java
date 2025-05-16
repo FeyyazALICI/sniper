@@ -1,0 +1,38 @@
+package com.sniper.fileandbatch.components.file.bussiness.dto;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import java.util.Date;
+
+import org.hibernate.annotations.Immutable;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+@Data
+@NoArgsConstructor
+public class DaysWithoutShootingDTO {
+    
+    @JsonProperty("id")  
+    private String id;
+
+    @JsonProperty("date_of_rest")
+    private String dateOfRest;
+
+
+    public DaysWithoutShootingDTO(
+        String id,
+
+        String dateOfRest
+    ){
+        this.id = id;
+
+        this.dateOfRest           = dateOfRest;
+    }
+}

@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Configuration;
 import com.sniper.fileandbatch.components.batch.job.HelloJob;
 
 @Configuration
-public class QuartzConfig {
+public class QuartzConfigHello {
     /*  SIMPLE HELLO JOB
     @Bean
     public JobDetail helloJobDetail() {

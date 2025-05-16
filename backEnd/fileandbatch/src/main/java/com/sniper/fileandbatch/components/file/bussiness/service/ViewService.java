@@ -2,6 +2,7 @@ package com.sniper.fileandbatch.components.file.bussiness.service;
 
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -43,6 +44,22 @@ public class ViewService implements ShootingWithWeaponIdInterface{
             e.printStackTrace();
             throw e;
         }
+    }
+
+    // GET ALL with raw entity to be used by batch operations
+    public List<ShootingWithWeapon> getAllShootingWithWeaponsRaw() throws Exception{
+        try{
+            List<ShootingWithWeapon> data = this.shootingWithWeaponRepo.findAll();
+            return data;
+        }catch(Exception e){
+            e.printStackTrace();
+            throw e;
+        }
+    }
+
+    // getting the earliest date of shooting to be used in batch ops
+    public Date getEarlistDateOfShooting(){
+        return this.shootingWithWeaponRepo.findFirstShootNative();
     }
 
     // GET BY ID
