@@ -14,11 +14,26 @@
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
   <!-- Your custom JS -->
+   <script src="../../common/js/common.js" defer></script>
   <script src="../js/script.js" defer></script>
 </head>
 <body class="bg-light">
   <div id="main-div" style="width: 1500px;">
-    <div id="go-to-details" class="btn btn-primary m-3">Go to Days With Details</div>
+    <div class="row">
+      <div class="col">
+        <button id="go_to_details" class="btn btn-success mt-3" style="float: right; margin-right: 100px;" 
+          onclick="navigate('../../days_with_details/html/days_with_details.html')">Go to Extended Details</button>
+      </div>
+      <div class="col">
+        <button id="go_to_summary" class="btn btn-success mt-3" style="float: right; margin-right: 100px;" 
+          onclick="navigate('../../days_with_details/html/days_with_details.html')">Go to Summary</button>
+      </div>
+      <div class="col">
+        <button id="go_to_weapon_based_stats" class="btn btn-success mt-3" style="float: right; margin-right: 100px;" 
+          onclick="navigate('../../days_with_details/html/days_with_details.html')">Go to Weapon Based Statistics</button>
+      </div>
+    </div>
+    
   </div>
 
   <!-- Bootstrap JS (no integrity check) -->

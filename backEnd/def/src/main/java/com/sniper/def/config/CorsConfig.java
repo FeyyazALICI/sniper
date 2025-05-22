@@ -13,7 +13,16 @@ public class CorsConfig implements WebMvcConfigurer {
                 .allowedOrigins(
                     "http://localhost:4200", // Angular
                     "http://localhost:3000",  // jQuery / other frontend dev server
-                    "http://localhost:52330"
+                    "http://localhost:52330",
+                    "http://localhost:52331",
+                    "http://localhost:52332",
+                    "http://localhost:52333",
+                    "http://localhost:52334",
+                    "http://localhost:52335",
+                    "http://localhost:52336",
+                    "http://localhost:52337",
+                    "http://localhost:52338",
+                    "http://localhost:52339"
                 )
                 .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
                 .allowedHeaders("Origin", "Content-Type", "Accept", "Authorization")

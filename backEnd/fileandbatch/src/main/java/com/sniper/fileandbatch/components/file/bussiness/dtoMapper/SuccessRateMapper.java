@@ -14,75 +14,75 @@ public class SuccessRateMapper {
 
     private static final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
-    public SuccessRateDTO entityToDTOMapper(ShootingWithWeapon shooting) {
+    public SuccessRateDTO entityToDTOMapper(ShootingWithWeapon dataEntity) {
 
         SuccessRateDTO dto = new SuccessRateDTO();
 
         // id
-        dto.setId(shooting.getId() != null ? shooting.getId().toString() : null);
+        dto.setId(dataEntity.getId() != null ? dataEntity.getId().toString() : null);
 
         // distance
-        dto.setDistance(shooting.getDistance() != null ? shooting.getDistance().toPlainString() : null);
+        dto.setDistance(dataEntity.getDistance() != null ? dataEntity.getDistance().toPlainString() : null);
 
         // distanceCategory
         dto.setDistanceCategory(
-            shooting.getDistanceCategory() != null && !shooting.getDistanceCategory().trim().isEmpty()
-                ? shooting.getDistanceCategory()
+            dataEntity.getDistanceCategory() != null && !dataEntity.getDistanceCategory().trim().isEmpty()
+                ? dataEntity.getDistanceCategory()
                 : null
         );
 
         // shotFired
-        dto.setShotFired(shooting.getShotFired() != null ? shooting.getShotFired().toPlainString() : null);
+        dto.setShotFired(dataEntity.getShotFired() != null ? dataEntity.getShotFired().toPlainString() : null);
 
         // hit
-        dto.setHit(shooting.getHit() != null ? shooting.getHit().toPlainString() : null);
+        dto.setHit(dataEntity.getHit() != null ? dataEntity.getHit().toPlainString() : null);
 
         // dateOfShooting
-        dto.setDateOfShooting(shooting.getDateOfShooting() != null ? sdf.format(shooting.getDateOfShooting()) : null);
+        dto.setDateOfShooting(dataEntity.getDateOfShooting() != null ? sdf.format(dataEntity.getDateOfShooting()) : null);
 
         // weaponId
-        dto.setWeaponId(shooting.getWeaponId() != null ? shooting.getWeaponId().toString() : null);
+        dto.setWeaponId(dataEntity.getWeaponId() != null ? dataEntity.getWeaponId().toString() : null);
 
         // weaponBrand
         dto.setWeaponBrand(
-            shooting.getWeaponBrand() != null && !shooting.getWeaponBrand().trim().isEmpty()
-                ? shooting.getWeaponBrand()
+            dataEntity.getWeaponBrand() != null && !dataEntity.getWeaponBrand().trim().isEmpty()
+                ? dataEntity.getWeaponBrand()
                 : null
         );
 
         // weaponSerialNumber
         dto.setWeaponSerialNumber(
-            shooting.getWeaponSerialNumber() != null && !shooting.getWeaponSerialNumber().trim().isEmpty()
-                ? shooting.getWeaponSerialNumber()
+            dataEntity.getWeaponSerialNumber() != null && !dataEntity.getWeaponSerialNumber().trim().isEmpty()
+                ? dataEntity.getWeaponSerialNumber()
                 : null
         );
 
         // weaponBoreSize
-        dto.setWeaponBoreSize(shooting.getWeaponBoreSize() != null ? shooting.getWeaponBoreSize().toPlainString() : null);
+        dto.setWeaponBoreSize(dataEntity.getWeaponBoreSize() != null ? dataEntity.getWeaponBoreSize().toPlainString() : null);
 
         // weaponBoreUnit
         dto.setWeaponBoreUnit(
-            shooting.getWeaponBoreUnit() != null && !shooting.getWeaponBoreUnit().trim().isEmpty()
-                ? shooting.getWeaponBoreUnit()
+            dataEntity.getWeaponBoreUnit() != null && !dataEntity.getWeaponBoreUnit().trim().isEmpty()
+                ? dataEntity.getWeaponBoreUnit()
                 : null
         );
 
         // weaponType
         dto.setWeaponType(
-            shooting.getWeaponType() != null && !shooting.getWeaponType().trim().isEmpty()
-                ? shooting.getWeaponType()
+            dataEntity.getWeaponType() != null && !dataEntity.getWeaponType().trim().isEmpty()
+                ? dataEntity.getWeaponType()
                 : null
         );
 
         // weaponPhotoQr
         dto.setWeaponPhotoQr(
-            shooting.getWeaponPhotoQr() != null && !shooting.getWeaponPhotoQr().trim().isEmpty()
-                ? shooting.getWeaponPhotoQr()
+            dataEntity.getWeaponPhotoQr() != null && !dataEntity.getWeaponPhotoQr().trim().isEmpty()
+                ? dataEntity.getWeaponPhotoQr()
                 : null
         );
 
-        if(shooting.getHit()!=null && shooting.getShotFired()!=null && shooting.getShotFired().compareTo(BigDecimal.ZERO)!=0){
-            BigDecimal successRate = shooting.getHit().divide(shooting.getShotFired(),2, RoundingMode.HALF_UP);
+        if(dataEntity.getHit()!=null && dataEntity.getShotFired()!=null && dataEntity.getShotFired().compareTo(BigDecimal.ZERO)!=0){
+            BigDecimal successRate = dataEntity.getHit().divide(dataEntity.getShotFired(),2, RoundingMode.HALF_UP);
             dto.setSuccessRate(successRate.toString());        
         }
 

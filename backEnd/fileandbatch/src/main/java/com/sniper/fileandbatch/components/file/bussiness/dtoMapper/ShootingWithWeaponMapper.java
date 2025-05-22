@@ -12,74 +12,74 @@ public class ShootingWithWeaponMapper {
 
     private static final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
-    public ShootingWithWeaponDTO entityToDTOMapper(ShootingWithWeapon shooting) {
+    public ShootingWithWeaponDTO entityToDTOMapper(ShootingWithWeapon dataEntity) {
 
-        ShootingWithWeaponDTO dto = new ShootingWithWeaponDTO();
+        ShootingWithWeaponDTO dataDTO = new ShootingWithWeaponDTO();
 
         // id
-        dto.setId(shooting.getId() != null ? shooting.getId().toString() : null);
+        dataDTO.setId(dataEntity.getId() != null ? dataEntity.getId().toString() : null);
 
         // distance
-        dto.setDistance(shooting.getDistance() != null ? shooting.getDistance().toPlainString() : null);
+        dataDTO.setDistance(dataEntity.getDistance() != null ? dataEntity.getDistance().toPlainString() : null);
 
         // distanceCategory
-        dto.setDistanceCategory(
-            shooting.getDistanceCategory() != null && !shooting.getDistanceCategory().trim().isEmpty()
-                ? shooting.getDistanceCategory()
+        dataDTO.setDistanceCategory(
+            dataEntity.getDistanceCategory() != null && !dataEntity.getDistanceCategory().trim().isEmpty()
+                ? dataEntity.getDistanceCategory()
                 : null
         );
 
         // shotFired
-        dto.setShotFired(shooting.getShotFired() != null ? shooting.getShotFired().toPlainString() : null);
+        dataDTO.setShotFired(dataEntity.getShotFired() != null ? dataEntity.getShotFired().toPlainString() : null);
 
         // hit
-        dto.setHit(shooting.getHit() != null ? shooting.getHit().toPlainString() : null);
+        dataDTO.setHit(dataEntity.getHit() != null ? dataEntity.getHit().toPlainString() : null);
 
         // dateOfShooting
-        dto.setDateOfShooting(shooting.getDateOfShooting() != null ? sdf.format(shooting.getDateOfShooting()) : null);
+        dataDTO.setDateOfShooting(dataEntity.getDateOfShooting() != null ? sdf.format(dataEntity.getDateOfShooting()) : null);
 
         // weaponId
-        dto.setWeaponId(shooting.getWeaponId() != null ? shooting.getWeaponId().toString() : null);
+        dataDTO.setWeaponId(dataEntity.getWeaponId() != null ? dataEntity.getWeaponId().toString() : null);
 
         // weaponBrand
-        dto.setWeaponBrand(
-            shooting.getWeaponBrand() != null && !shooting.getWeaponBrand().trim().isEmpty()
-                ? shooting.getWeaponBrand()
+        dataDTO.setWeaponBrand(
+            dataEntity.getWeaponBrand() != null && !dataEntity.getWeaponBrand().trim().isEmpty()
+                ? dataEntity.getWeaponBrand()
                 : null
         );
 
         // weaponSerialNumber
-        dto.setWeaponSerialNumber(
-            shooting.getWeaponSerialNumber() != null && !shooting.getWeaponSerialNumber().trim().isEmpty()
-                ? shooting.getWeaponSerialNumber()
+        dataDTO.setWeaponSerialNumber(
+            dataEntity.getWeaponSerialNumber() != null && !dataEntity.getWeaponSerialNumber().trim().isEmpty()
+                ? dataEntity.getWeaponSerialNumber()
                 : null
         );
 
         // weaponBoreSize
-        dto.setWeaponBoreSize(shooting.getWeaponBoreSize() != null ? shooting.getWeaponBoreSize().toPlainString() : null);
+        dataDTO.setWeaponBoreSize(dataEntity.getWeaponBoreSize() != null ? dataEntity.getWeaponBoreSize().toPlainString() : null);
 
         // weaponBoreUnit
-        dto.setWeaponBoreUnit(
-            shooting.getWeaponBoreUnit() != null && !shooting.getWeaponBoreUnit().trim().isEmpty()
-                ? shooting.getWeaponBoreUnit()
+        dataDTO.setWeaponBoreUnit(
+            dataEntity.getWeaponBoreUnit() != null && !dataEntity.getWeaponBoreUnit().trim().isEmpty()
+                ? dataEntity.getWeaponBoreUnit()
                 : null
         );
 
         // weaponType
-        dto.setWeaponType(
-            shooting.getWeaponType() != null && !shooting.getWeaponType().trim().isEmpty()
-                ? shooting.getWeaponType()
+        dataDTO.setWeaponType(
+            dataEntity.getWeaponType() != null && !dataEntity.getWeaponType().trim().isEmpty()
+                ? dataEntity.getWeaponType()
                 : null
         );
 
         // weaponPhotoQr
-        dto.setWeaponPhotoQr(
-            shooting.getWeaponPhotoQr() != null && !shooting.getWeaponPhotoQr().trim().isEmpty()
-                ? shooting.getWeaponPhotoQr()
+        dataDTO.setWeaponPhotoQr(
+            dataEntity.getWeaponPhotoQr() != null && !dataEntity.getWeaponPhotoQr().trim().isEmpty()
+                ? dataEntity.getWeaponPhotoQr()
                 : null
         );
 
-        return dto;
+        return dataDTO;
     }
 
     // Optional: If you ever need to map back from DTO to Entity (e.g., for tests),
