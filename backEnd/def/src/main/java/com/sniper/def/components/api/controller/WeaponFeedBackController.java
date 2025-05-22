@@ -12,10 +12,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.sniper.def.common.responseReturns.ErrorMessageDerived;
 import com.sniper.def.common.responseReturns.HttpHeaderCreator;
-import com.sniper.def.components.dao.entity.WeaponFeedBack;
 import com.sniper.def.components.api.controllerInterface.WeaponFeedBackControllerInterface;
 import com.sniper.def.components.bussiness.dto.WeaponFeedBackDTO;
-import com.sniper.def.components.bussiness.dtoMapper.WeaponFeedBackMapper;
 import com.sniper.def.components.bussiness.service.WeaponFeedBackService;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -44,10 +42,10 @@ public class WeaponFeedBackController implements WeaponFeedBackControllerInterfa
 
     @Override
     @GetMapping()
-    public ResponseEntity getAllWeaponFeedBacks(HttpServletRequest request){
+    public ResponseEntity getAllData(HttpServletRequest request){
         String requestType = "GET";
         try{
-            List<WeaponFeedBackDTO> data = service.getAllWeaponFeedBacks();
+            List<WeaponFeedBackDTO> data = service.getAllData();
             if(   data!=null   ){
                 HttpHeaders responseHeader = this.httpHeaderCreator.okResponseHeader(request, requestType);
                 return new ResponseEntity<>(data, responseHeader, HttpStatus.OK);
@@ -63,11 +61,11 @@ public class WeaponFeedBackController implements WeaponFeedBackControllerInterfa
 
     @Override
     @PostMapping("/id")
-    public ResponseEntity getWeaponFeedBackById(HttpServletRequest request, @RequestBody HashMap<String, String> dataReceived   ){
+    public ResponseEntity getDataById(HttpServletRequest request, @RequestBody HashMap<String, String> dataReceived   ){
         String requestType = "GET";
         try{
             Long id = Long.valueOf(dataReceived.get("id"));
-            WeaponFeedBackDTO data = service.getWeaponFeedBackById(   id   );
+            WeaponFeedBackDTO data = service.getDataById(   id   );
             if(   data!=null   ){
                 HttpHeaders responseHeader = this.httpHeaderCreator.okResponseHeader(request, requestType);
                 return new ResponseEntity<>(data, responseHeader, HttpStatus.OK);
@@ -83,15 +81,13 @@ public class WeaponFeedBackController implements WeaponFeedBackControllerInterfa
 
     @Override
     @PostMapping()
-    public ResponseEntity insertWeaponFeedBack(   HttpServletRequest request, @Valid @RequestBody WeaponFeedBackDTO dataReceived   ){
-        WeaponFeedBackMapper weaponFeedBackMapper = new WeaponFeedBackMapper();
-        WeaponFeedBack weaponFeedBack = weaponFeedBackMapper.DTOtoEntityMapper( dataReceived );
+    public ResponseEntity insertRow(   HttpServletRequest request, @Valid @RequestBody WeaponFeedBackDTO dataDTO   ){
         ErrorMessageDerived emd = new ErrorMessageDerived();
         String requestType = "POST";
         try{
-            if( service.insertWeaponFeedBack(weaponFeedBack) ){
+            if( service.insertRow(dataDTO) ){
                 HttpHeaders responseHeader = this.httpHeaderCreator.okResponseHeader(request, requestType);
-                return new ResponseEntity<>(weaponFeedBack, responseHeader, HttpStatus.OK);
+                return new ResponseEntity<>(dataDTO, responseHeader, HttpStatus.OK);
             }
             HttpHeaders responseHeader = this.httpHeaderCreator.conflictResponseHeader(request, requestType);
             return new ResponseEntity<>( emd.conflictError(), responseHeader, HttpStatus.CONFLICT);
@@ -103,18 +99,16 @@ public class WeaponFeedBackController implements WeaponFeedBackControllerInterfa
 
     @Override
     @PutMapping()
-    public ResponseEntity updateWeaponFeedBack(   HttpServletRequest request, @Valid @RequestBody WeaponFeedBackDTO dataReceived   ){
-        WeaponFeedBackMapper weaponFeedBackMapper = new WeaponFeedBackMapper();
-        WeaponFeedBack weaponFeedBack = weaponFeedBackMapper.DTOtoEntityMapper( dataReceived );
+    public ResponseEntity updateRow(   HttpServletRequest request, @Valid @RequestBody WeaponFeedBackDTO dataDTO   ){
         ErrorMessageDerived emd = new ErrorMessageDerived();
         String requestType = "PUT";
         try{
-            if( service.updateWeaponFeedBack(weaponFeedBack) ){
+            if( service.updateRow(dataDTO) ){
                 HttpHeaders responseHeader = this.httpHeaderCreator.okResponseHeader(request, requestType);
-                return new ResponseEntity<>(weaponFeedBack, responseHeader, HttpStatus.OK);
+                return new ResponseEntity<>(dataDTO, responseHeader, HttpStatus.OK);
             }
             HttpHeaders responseHeader = this.httpHeaderCreator.notFoundResponseHeader(request, requestType);
-            return new ResponseEntity<>( emd.notFoundError(weaponFeedBack.getId().toString()), responseHeader, HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>( emd.notFoundError(dataDTO.getId().toString()), responseHeader, HttpStatus.NOT_FOUND);
         }catch( Exception e ){
             HttpHeaders responseHeader = this.httpHeaderCreator.internalServerErrorResponseHeader(request, requestType);
             return new ResponseEntity<>(null, responseHeader, HttpStatus.INTERNAL_SERVER_ERROR);
@@ -124,11 +118,11 @@ public class WeaponFeedBackController implements WeaponFeedBackControllerInterfa
 
     @Override
     @DeleteMapping
-    public ResponseEntity<Map<String, String>> deleteWeaponFeedBack(   HttpServletRequest request, @RequestBody HashMap<String, String> dataReceived   ){
+    public ResponseEntity<Map<String, String>> deleteRow(   HttpServletRequest request, @RequestBody HashMap<String, String> dataReceived   ){
         Long id = Long.valueOf( dataReceived.get("id") );
         String requestType = "DELETE";
         try{
-            if( service.deleteWeaponFeedBack(id) ){
+            if( service.deleteRow(id) ){
                 HttpHeaders responseHeader = this.httpHeaderCreator.okResponseHeader(request, requestType);
                 Map<String, String> responseBody = new HashMap<>();
                 responseBody.put("message", "Delete Operation is successful!");

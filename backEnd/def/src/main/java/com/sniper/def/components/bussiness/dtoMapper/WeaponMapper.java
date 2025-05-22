@@ -6,7 +6,7 @@ import com.sniper.def.components.dao.entity.Weapon;
 public class WeaponMapper {
     
 
-    public Weapon DTOtoEntityMapper( WeaponDTO weaponDTO ){
+    public Weapon DTOtoEntityMapper( WeaponDTO dataDTO ){
         
         // attributes
         Long id = null;
@@ -21,69 +21,69 @@ public class WeaponMapper {
 
         // transformation   ----------------------------------------------------------------
         // id
-        if( weaponDTO.getId()==null || ( weaponDTO.getId().trim().equals("") ) ){
+        if( dataDTO.getId()==null || ( dataDTO.getId().trim().equals("") ) ){
             id = null;
         }else{
-            id = Long.parseLong(weaponDTO.getId());
+            id = Long.parseLong(dataDTO.getId());
         }
 
         // brand
-        if( weaponDTO.getBrand()==null || ( weaponDTO.getBrand().trim().equals("") )){
+        if( dataDTO.getBrand()==null || ( dataDTO.getBrand().trim().equals("") )){
             brand = null;
         }else{
-            brand = weaponDTO.getBrand();
+            brand = dataDTO.getBrand();
         }
 
         // serialNumber
-        if( weaponDTO.getSerialNumber()==null || ( weaponDTO.getSerialNumber().trim().equals("") )){
+        if( dataDTO.getSerialNumber()==null || ( dataDTO.getSerialNumber().trim().equals("") )){
             serialNumber = null;
         }else{
-            serialNumber = weaponDTO.getSerialNumber();
+            serialNumber = dataDTO.getSerialNumber();
         }
 
         // boreSize
-        if( weaponDTO.getBoreSize()==null || ( weaponDTO.getBoreSize().trim().equals("") )){
+        if( dataDTO.getBoreSize()==null || ( dataDTO.getBoreSize().trim().equals("") )){
             boreSize = null;
         }else{
-            boreSize = weaponDTO.getBoreSize();
+            boreSize = dataDTO.getBoreSize();
         }
 
         // boreUnit
-        if( weaponDTO.getBoreUnit()==null || ( weaponDTO.getBoreUnit().trim().equals("") )){
+        if( dataDTO.getBoreUnit()==null || ( dataDTO.getBoreUnit().trim().equals("") )){
             boreUnit = null;
         }else{
-            boreUnit = weaponDTO.getBoreUnit();
+            boreUnit = dataDTO.getBoreUnit();
         }
 
         // type
-        if( weaponDTO.getType()==null || ( weaponDTO.getType().trim().equals("") )){
+        if( dataDTO.getType()==null || ( dataDTO.getType().trim().equals("") )){
             type = null;
         }else{
-            type = weaponDTO.getType();
+            type = dataDTO.getType();
         }
 
         // photoQr
-        if( weaponDTO.getPhotoQr()==null || ( weaponDTO.getPhotoQr().trim().equals("") )){
+        if( dataDTO.getPhotoQr()==null || ( dataDTO.getPhotoQr().trim().equals("") )){
             photoQr = null;
         }else{
-            photoQr = weaponDTO.getPhotoQr();
+            photoQr = dataDTO.getPhotoQr();
         }
 
         // Entity creation
-        Weapon weapon = new Weapon();
-        weapon.setId(id);
+        Weapon dataEntity = new Weapon();
+        dataEntity.setId(id);
 
-        weapon.setBrand(brand);
-        weapon.setSerialNumber(serialNumber);
-        weapon.setBoreSize(boreSize);
-        weapon.setBoreUnit(boreUnit);
-        weapon.setType(type);
+        dataEntity.setBrand(brand);
+        dataEntity.setSerialNumber(serialNumber);
+        dataEntity.setBoreSize(boreSize);
+        dataEntity.setBoreUnit(boreUnit);
+        dataEntity.setType(type);
 
-        weapon.setPhotoQr(photoQr);
-        return weapon;
+        dataEntity.setPhotoQr(photoQr);
+        return dataEntity;
     }
 
-    public WeaponDTO entityToDTOMapper( Weapon weapon ){
+    public WeaponDTO entityToDTOMapper( Weapon dataEntity ){
         
         // attributes
         String id = null;
@@ -98,66 +98,66 @@ public class WeaponMapper {
 
         // transformation   ----------------------------------------------------------------
         // id
-        if(   weapon.getId()==null   ){
+        if(   dataEntity.getId()==null   ){
             id = null;
         }else{
-            id = weapon.getId().toString();
+            id = dataEntity.getId().toString();
         }
 
         // brand
-        if(   weapon.getBrand()==null || weapon.getBrand().trim().equals("")   ){
+        if(   dataEntity.getBrand()==null || dataEntity.getBrand().trim().equals("")   ){
             brand = null;
         }else{
-            brand = weapon.getBrand();
+            brand = dataEntity.getBrand();
         }
         
         // serialNumber
-        if(   weapon.getSerialNumber()==null || weapon.getSerialNumber().trim().equals("")   ){
+        if(   dataEntity.getSerialNumber()==null || dataEntity.getSerialNumber().trim().equals("")   ){
             serialNumber = null;
         }else{
-            serialNumber = weapon.getSerialNumber();
+            serialNumber = dataEntity.getSerialNumber();
         }
 
         // boreSize
-        if(   weapon.getBoreSize()==null || weapon.getBoreSize().trim().equals("")   ){
+        if(   dataEntity.getBoreSize()==null || dataEntity.getBoreSize().trim().equals("")   ){
             boreSize = null;
         }else{
-            boreSize = weapon.getBoreSize();
+            boreSize = dataEntity.getBoreSize();
         }
 
         // boreUnit
-        if(   weapon.getBoreUnit()==null || weapon.getBoreUnit().trim().equals("")   ){
+        if(   dataEntity.getBoreUnit()==null || dataEntity.getBoreUnit().trim().equals("")   ){
             boreUnit = null;
         }else{
-            boreUnit = weapon.getBoreUnit();
+            boreUnit = dataEntity.getBoreUnit();
         }
 
         // type
-        if(   weapon.getType()==null || weapon.getType().trim().equals("")   ){
+        if(   dataEntity.getType()==null || dataEntity.getType().trim().equals("")   ){
             type = null;
         }else{
-            type = weapon.getType();
+            type = dataEntity.getType();
         }
 
         // photoQr
-        if(   weapon.getPhotoQr()==null || weapon.getPhotoQr().trim().equals("")   ){
+        if(   dataEntity.getPhotoQr()==null || dataEntity.getPhotoQr().trim().equals("")   ){
             photoQr = null;
         }else{
-            photoQr = weapon.getPhotoQr();
+            photoQr = dataEntity.getPhotoQr();
         }
 
         // Entity creation
-        WeaponDTO weaponDTO = new WeaponDTO();
-        weaponDTO.setId(id);
+        WeaponDTO dataDTO = new WeaponDTO();
+        dataDTO.setId(id);
 
-        weaponDTO.setBrand(brand);
-        weaponDTO.setSerialNumber(serialNumber);
-        weaponDTO.setBoreSize(boreSize);
-        weaponDTO.setBoreUnit(boreUnit);
-        weaponDTO.setType(type);
+        dataDTO.setBrand(brand);
+        dataDTO.setSerialNumber(serialNumber);
+        dataDTO.setBoreSize(boreSize);
+        dataDTO.setBoreUnit(boreUnit);
+        dataDTO.setType(type);
 
-        weaponDTO.setPhotoQr(photoQr);
-        return weaponDTO;
+        dataDTO.setPhotoQr(photoQr);
+        return dataDTO;
     }
     
 }

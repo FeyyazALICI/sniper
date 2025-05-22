@@ -6,7 +6,7 @@ import com.sniper.def.components.dao.entity.WeaponFeedBack;
 public class WeaponFeedBackMapper {
     
 
-    public WeaponFeedBack DTOtoEntityMapper( WeaponFeedBackDTO weaponFeedBackDTO ){
+    public WeaponFeedBack DTOtoEntityMapper( WeaponFeedBackDTO dataDTO ){
         
         // attributes
         Long id = null;
@@ -16,37 +16,37 @@ public class WeaponFeedBackMapper {
 
         // transformation   ----------------------------------------------------------------
         // id
-        if( weaponFeedBackDTO.getId()==null || ( weaponFeedBackDTO.getId().trim().equals("") ) ){
+        if( dataDTO.getId()==null || ( dataDTO.getId().trim().equals("") ) ){
             id = null;
         }else{
-            id = Long.parseLong(weaponFeedBackDTO.getId());
+            id = Long.parseLong(dataDTO.getId());
         }
 
         // weaponId
-        if( weaponFeedBackDTO.getWeaponId()==null || ( weaponFeedBackDTO.getWeaponId().trim().equals("") )){
+        if( dataDTO.getWeaponId()==null || ( dataDTO.getWeaponId().trim().equals("") )){
             weaponId = null;
         }else{
-            weaponId = Long.parseLong( weaponFeedBackDTO.getWeaponId() );
+            weaponId = Long.parseLong( dataDTO.getWeaponId() );
         }
 
         // userComment
-        if( weaponFeedBackDTO.getUserComment()==null || ( weaponFeedBackDTO.getUserComment().trim().equals("") )){
+        if( dataDTO.getUserComment()==null || ( dataDTO.getUserComment().trim().equals("") )){
             userComment = null;
         }else{
-            userComment = weaponFeedBackDTO.getUserComment();
+            userComment = dataDTO.getUserComment();
         }
 
 
         // Entity creation
-        WeaponFeedBack weaponFeedBack = new WeaponFeedBack();
-        weaponFeedBack.setId(id);
+        WeaponFeedBack dataEntity = new WeaponFeedBack();
+        dataEntity.setId(id);
 
-        weaponFeedBack.setWeaponId(weaponId);
-        weaponFeedBack.setUserComment(userComment);
-        return weaponFeedBack;
+        dataEntity.setWeaponId(weaponId);
+        dataEntity.setUserComment(userComment);
+        return dataEntity;
     }
 
-    public WeaponFeedBackDTO entityToDTOMapper( WeaponFeedBack weaponFeedBack ){
+    public WeaponFeedBackDTO entityToDTOMapper( WeaponFeedBack dataEntity ){
         
         // attributes
         String id = null;
@@ -56,34 +56,34 @@ public class WeaponFeedBackMapper {
 
         // transformation   ----------------------------------------------------------------
         // id
-        if(   weaponFeedBack.getId()==null   ){
+        if(   dataEntity.getId()==null   ){
             id = null;
         }else{
-            id = weaponFeedBack.getId().toString();
+            id = dataEntity.getId().toString();
         }
 
         // weaponId
-        if(   weaponFeedBack.getWeaponId()==null   ){
+        if(   dataEntity.getWeaponId()==null   ){
             weaponId = null;
         }else{
-            weaponId = weaponFeedBack.getWeaponId().toString();
+            weaponId = dataEntity.getWeaponId().toString();
         }
 
         // userComment
-        if( weaponFeedBack.getUserComment()==null || ( weaponFeedBack.getUserComment().trim().equals("") )){
+        if( dataEntity.getUserComment()==null || ( dataEntity.getUserComment().trim().equals("") )){
             userComment = null;
         }else{
-            userComment = weaponFeedBack.getUserComment();
+            userComment = dataEntity.getUserComment();
         }
 
 
         // Entity creation
-        WeaponFeedBackDTO weaponFeedBackDTO = new WeaponFeedBackDTO();
-        weaponFeedBackDTO.setId(id);
+        WeaponFeedBackDTO dataDTO = new WeaponFeedBackDTO();
+        dataDTO.setId(id);
 
-        weaponFeedBackDTO.setWeaponId(weaponId);
-        weaponFeedBackDTO.setUserComment(userComment);
-        return weaponFeedBackDTO;
+        dataDTO.setWeaponId(weaponId);
+        dataDTO.setUserComment(userComment);
+        return dataDTO;
     }
     
 }

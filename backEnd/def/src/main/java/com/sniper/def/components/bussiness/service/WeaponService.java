@@ -17,25 +17,25 @@ import jakarta.transaction.Transactional;
 @Service
 public class WeaponService implements WeaponServiceInterface{
     
-    private final WeaponRepo weaponRepo;
+    private final WeaponRepo crudRepo;
 
     public WeaponService(
-        WeaponRepo weaponRepo
+        WeaponRepo crudRepo
     ){
-        this.weaponRepo             = weaponRepo;
+        this.crudRepo             = crudRepo;
     }
 
     // weapon CRUD OPERATIONS ---------------------------------------------------
     // GET ALL
     @Override
-    public List<WeaponDTO> getAllWeapons() throws Exception{
+    public List<WeaponDTO> getAllData() throws Exception{
         try{
-            WeaponMapper weaponMapper = new WeaponMapper();
-            List<Weapon> data = this.weaponRepo.findAll();
+            WeaponMapper mapper = new WeaponMapper();
+            List<Weapon> data = this.crudRepo.findAll();
             List<WeaponDTO> dataDTO = new ArrayList<>();
             for(Weapon e: data){
                 WeaponDTO weaponDTO = new WeaponDTO();
-                weaponDTO = weaponMapper.entityToDTOMapper(e);
+                weaponDTO = mapper.entityToDTOMapper(e);
                 dataDTO.add(weaponDTO);
             }
             return dataDTO;
@@ -46,14 +46,14 @@ public class WeaponService implements WeaponServiceInterface{
     }
 
     @Override
-    public WeaponDTO getWeaponById( Long id ) throws Exception{
+    public WeaponDTO getDataById( Long id ) throws Exception{
         try{
-            WeaponMapper weaponMapper = new WeaponMapper();
+            WeaponMapper mapper = new WeaponMapper();
 
-            Optional<Weapon> data = this.weaponRepo.findById(id);
+            Optional<Weapon> data = this.crudRepo.findById(id);
             if(data.isPresent()){
                 WeaponDTO dataDTO = new WeaponDTO();
-                dataDTO = weaponMapper.entityToDTOMapper(data.get());
+                dataDTO = mapper.entityToDTOMapper(data.get());
                 return dataDTO;
             }else
                 return null;
@@ -65,11 +65,14 @@ public class WeaponService implements WeaponServiceInterface{
 
     @Override
     @Transactional
-    public boolean insertWeapon( Weapon data ) throws Exception{
+    public boolean insertRow( WeaponDTO dataDTO ) throws Exception{
         try{
-            if(data.getSerialNumber()!=null && !data.getSerialNumber().trim().equals("")){
-                data.setId(null);
-                this.weaponRepo.saveAndFlush(data);
+            if(dataDTO.getSerialNumber()!=null && !dataDTO.getSerialNumber().trim().equals("")){
+                dataDTO.setId(null);
+                WeaponMapper mapper = new WeaponMapper();
+                Weapon data = new Weapon();
+                data = mapper.DTOtoEntityMapper(dataDTO);
+                this.crudRepo.saveAndFlush(data);
                 return true;
             }
             System.out.println("SerialNumber can not be left empty!");
@@ -81,9 +84,9 @@ public class WeaponService implements WeaponServiceInterface{
     }
 
     @Override
-    public boolean ifWeaponExists( Long id ) throws Exception{
+    public boolean ifRowExists( Long id ) throws Exception{
         try{
-            Optional<Weapon> list = this.weaponRepo.findById(id);
+            Optional<Weapon> list = this.crudRepo.findById(id);
             if(   list.isPresent()   )
                 return true;
             return false;
@@ -95,10 +98,13 @@ public class WeaponService implements WeaponServiceInterface{
 
     @Override
     @Transactional
-    public boolean updateWeapon( Weapon data ) throws Exception{
+    public boolean updateRow( WeaponDTO dataDTO ) throws Exception{
         try{
-            if( ifWeaponExists( data.getId() ) ){
-                this.weaponRepo.saveAndFlush(data);
+            WeaponMapper mapper = new WeaponMapper();
+            Weapon data = new Weapon();
+            data = mapper.DTOtoEntityMapper(dataDTO);
+            if( ifRowExists( data.getId() ) ){
+                this.crudRepo.saveAndFlush(data);
                 return true;
             }
             System.out.println("Weapon with given id does not exist!");
@@ -111,10 +117,10 @@ public class WeaponService implements WeaponServiceInterface{
 
     @Override
     @Transactional
-    public boolean deleteWeapon( Long id ) throws Exception{
+    public boolean deleteRow( Long id ) throws Exception{
         try{
-            if( ifWeaponExists( id ) ){
-                this.weaponRepo.deleteById( id );
+            if( ifRowExists( id ) ){
+                this.crudRepo.deleteById( id );
                 return true;
             }
             System.out.println("Weapon with given id does not exist!");
@@ -129,6 +135,6 @@ public class WeaponService implements WeaponServiceInterface{
 
      // checking if the weapon id is present
     public boolean isIdOfWeaponExist(Long id){
-        return this.weaponRepo.existsById(id);
+        return this.crudRepo.existsById(id);
     }
 }

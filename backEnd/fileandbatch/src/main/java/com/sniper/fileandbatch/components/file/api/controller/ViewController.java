@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.sniper.fileandbatch.common.HttpHeaderCreator;
 import com.sniper.fileandbatch.components.file.api.controllerInterface.ViewControllerInterface;
 import com.sniper.fileandbatch.components.file.bussiness.dto.ShootingWithWeaponDTO;
+import com.sniper.fileandbatch.components.file.bussiness.dto.SuccessRateDTO;
 import com.sniper.fileandbatch.components.file.bussiness.service.ViewService;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -38,10 +39,10 @@ public class ViewController implements ViewControllerInterface{
 
     @Override
     @GetMapping("/swwv")
-    public ResponseEntity getAllShootingWithWeapons(HttpServletRequest request){
+    public ResponseEntity getAllShootingWithWeaponsWithSuccessRate(HttpServletRequest request){
         String requestType = "GET";
         try{
-            List<ShootingWithWeaponDTO> data = viewService.getAllShootingWithWeapons();
+            List<SuccessRateDTO> data = viewService.getAllShootingWithWeaponsWithSuccessRate();
             if(   data!=null   ){
                 HttpHeaders responseHeader = this.httpHeaderCreator.okResponseHeader(request, requestType);
                 return new ResponseEntity<>(data, responseHeader, HttpStatus.OK);

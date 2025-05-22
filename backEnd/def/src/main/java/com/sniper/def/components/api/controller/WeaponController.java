@@ -12,10 +12,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.sniper.def.common.responseReturns.ErrorMessageDerived;
 import com.sniper.def.common.responseReturns.HttpHeaderCreator;
-import com.sniper.def.components.dao.entity.Weapon;
 import com.sniper.def.components.api.controllerInterface.WeaponControllerInterface;
 import com.sniper.def.components.bussiness.dto.WeaponDTO;
-import com.sniper.def.components.bussiness.dtoMapper.WeaponMapper;
 import com.sniper.def.components.bussiness.service.WeaponService;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -44,10 +42,10 @@ public class WeaponController implements WeaponControllerInterface{
 
     @Override
     @GetMapping()
-    public ResponseEntity getAllWeapons(HttpServletRequest request){
+    public ResponseEntity getAllData(HttpServletRequest request){
         String requestType = "GET";
         try{
-            List<WeaponDTO> data = service.getAllWeapons();
+            List<WeaponDTO> data = service.getAllData();
             if(   data!=null   ){
                 HttpHeaders responseHeader = this.httpHeaderCreator.okResponseHeader(request, requestType);
                 return new ResponseEntity<>(data, responseHeader, HttpStatus.OK);
@@ -63,11 +61,11 @@ public class WeaponController implements WeaponControllerInterface{
 
     @Override
     @PostMapping("/id")
-    public ResponseEntity getWeaponById(HttpServletRequest request, @RequestBody HashMap<String, String> dataReceived   ){
+    public ResponseEntity getDataById(HttpServletRequest request, @RequestBody HashMap<String, String> dataReceived   ){
         String requestType = "GET";
         try{
             Long id = Long.valueOf(dataReceived.get("id"));
-            WeaponDTO data = service.getWeaponById(   id   );
+            WeaponDTO data = service.getDataById(   id   );
             if(   data!=null   ){
                 HttpHeaders responseHeader = this.httpHeaderCreator.okResponseHeader(request, requestType);
                 return new ResponseEntity<>(data, responseHeader, HttpStatus.OK);
@@ -83,16 +81,15 @@ public class WeaponController implements WeaponControllerInterface{
 
     @Override
     @PostMapping()
-    public ResponseEntity insertWeapon(   HttpServletRequest request, @Valid @RequestBody WeaponDTO dataReceived   ){
-        WeaponMapper weaponMapper = new WeaponMapper();
-        Weapon weapon = weaponMapper.DTOtoEntityMapper( dataReceived );
+    public ResponseEntity insertRow(   HttpServletRequest request, @Valid @RequestBody WeaponDTO dataReceived   ){
+
         ErrorMessageDerived emd = new ErrorMessageDerived();
         String requestType = "POST";
-        System.out.println("weapon: " + weapon.getSerialNumber());
+        System.out.println("weapon: " + dataReceived.getSerialNumber());
         try{
-            if( service.insertWeapon(weapon) ){
+            if( service.insertRow(dataReceived) ){
                 HttpHeaders responseHeader = this.httpHeaderCreator.okResponseHeader(request, requestType);
-                return new ResponseEntity<>(weapon, responseHeader, HttpStatus.OK);
+                return new ResponseEntity<>(dataReceived, responseHeader, HttpStatus.OK);
             }
             HttpHeaders responseHeader = this.httpHeaderCreator.conflictResponseHeader(request, requestType);
             return new ResponseEntity<>( emd.conflictError(), responseHeader, HttpStatus.CONFLICT);
@@ -104,18 +101,16 @@ public class WeaponController implements WeaponControllerInterface{
 
     @Override
     @PutMapping()
-    public ResponseEntity updateWeapon(   HttpServletRequest request, @Valid @RequestBody WeaponDTO weaponDTO   ){
-        WeaponMapper weaponMapper = new WeaponMapper();
-        Weapon weapon = weaponMapper.DTOtoEntityMapper( weaponDTO );
+    public ResponseEntity updateRow(   HttpServletRequest request, @Valid @RequestBody WeaponDTO weaponDTO   ){
         ErrorMessageDerived emd = new ErrorMessageDerived();
         String requestType = "PUT";
         try{
-            if( service.updateWeapon(weapon) ){
+            if( service.updateRow(weaponDTO) ){
                 HttpHeaders responseHeader = this.httpHeaderCreator.okResponseHeader(request, requestType);
-                return new ResponseEntity<>(weapon, responseHeader, HttpStatus.OK);
+                return new ResponseEntity<>(weaponDTO, responseHeader, HttpStatus.OK);
             }
             HttpHeaders responseHeader = this.httpHeaderCreator.notFoundResponseHeader(request, requestType);
-            return new ResponseEntity<>( emd.notFoundError(weapon.getId().toString()), responseHeader, HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>( emd.notFoundError(weaponDTO.getId().toString()), responseHeader, HttpStatus.NOT_FOUND);
         }catch( Exception e ){
             HttpHeaders responseHeader = this.httpHeaderCreator.internalServerErrorResponseHeader(request, requestType);
             return new ResponseEntity<>(null, responseHeader, HttpStatus.INTERNAL_SERVER_ERROR);
@@ -125,11 +120,11 @@ public class WeaponController implements WeaponControllerInterface{
 
     @Override
     @DeleteMapping
-    public ResponseEntity<Map<String, String>> deleteWeapon(   HttpServletRequest request, @RequestBody HashMap<String, String> dataReceived   ){
+    public ResponseEntity<Map<String, String>> deleteRow(   HttpServletRequest request, @RequestBody HashMap<String, String> dataReceived   ){
         Long id = Long.valueOf( dataReceived.get("id") );
         String requestType = "DELETE";
         try{
-            if( service.deleteWeapon(id) ){
+            if( service.deleteRow(id) ){
                 HttpHeaders responseHeader = this.httpHeaderCreator.okResponseHeader(request, requestType);
                 Map<String, String> responseBody = new HashMap<>();
                 responseBody.put("message", "Delete Operation is successful!");

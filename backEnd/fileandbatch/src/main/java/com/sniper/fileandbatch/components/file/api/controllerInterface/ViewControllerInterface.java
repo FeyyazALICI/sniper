@@ -9,6 +9,6 @@ import jakarta.servlet.http.HttpServletRequest;
 
 public interface ViewControllerInterface {
     
-    public ResponseEntity getAllShootingWithWeapons(HttpServletRequest request);
+    public ResponseEntity getAllShootingWithWeaponsWithSuccessRate(HttpServletRequest request);
     public ResponseEntity getShootingWithWeaponById(HttpServletRequest request, @RequestBody HashMap<String, String> dataReceived   );
 }

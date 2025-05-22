@@ -62,7 +62,7 @@ INSERT INTO shooting (distance, distance_category, weapon_id, shot_fired, hit, d
 VALUES
 (5, 	'short',		4,  4, 4, '2025-05-07'),
 (10, 	'medium',		4,  4, 4, '2025-05-07'),
-(15, 	'long',			4,  3, 4, '2025-05-07'),
+(15, 	'long',			4,  4, 3, '2025-05-07'),
 (15, 	'long',			4,  5, 4, '2025-05-13'),
 (10, 	'medium',		4,  15, 12, '2025-05-13'),
 (5, 	'short',		4,  15, 14, '2025-05-13')
@@ -117,7 +117,9 @@ INNER JOIN
 		w.id = f.id
 ;
     
-# SELECT * FROM cat_with_price;
+SELECT * FROM days_without_shooting ORDER BY date_of_rest DESC;
+SELECT * FROM shooting_with_weapon;
+
 # TEST DB --------------------------------------------------------------------------------------------
 DROP DATABASE IF EXISTS SNIPER_DB_TEST;
 CREATE DATABASE SNIPER_DB_TEST;

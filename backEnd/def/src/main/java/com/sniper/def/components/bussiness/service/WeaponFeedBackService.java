@@ -17,24 +17,24 @@ import jakarta.transaction.Transactional;
 @Service
 public class WeaponFeedBackService implements WeaponFeedBackServiceInterface{
     
-    private final WeaponFeedBackRepo weaponFeedBackRepo;
-    private final WeaponService weaponService;
+    private final WeaponFeedBackRepo crudRepo;
+    private final WeaponService crudService;
 
     public WeaponFeedBackService(
-        WeaponFeedBackRepo weaponFeedBackRepo,
-        WeaponService weaponService
+        WeaponFeedBackRepo crudRepo,
+        WeaponService crudService
     ){
-        this.weaponFeedBackRepo     = weaponFeedBackRepo;
-        this.weaponService = weaponService;
+        this.crudRepo     = crudRepo;
+        this.crudService = crudService;
     }
 
 
     // weaponFeedBack CRUD OPERATIONS ---------------------------------------------------
     @Override
-    public List<WeaponFeedBackDTO> getAllWeaponFeedBacks() throws Exception{
+    public List<WeaponFeedBackDTO> getAllData() throws Exception{
         try{
             WeaponFeedBackMapper weaponFeedBackMapper = new WeaponFeedBackMapper();
-            List<WeaponFeedBack> data = this.weaponFeedBackRepo.findAll();
+            List<WeaponFeedBack> data = this.crudRepo.findAll();
             List<WeaponFeedBackDTO> dataDTO = new ArrayList<>();
             for(WeaponFeedBack e: data){
                 WeaponFeedBackDTO weaponFeedBackDTO = new WeaponFeedBackDTO();
@@ -49,11 +49,11 @@ public class WeaponFeedBackService implements WeaponFeedBackServiceInterface{
     }
 
     @Override
-    public WeaponFeedBackDTO getWeaponFeedBackById( Long id ) throws Exception{
+    public WeaponFeedBackDTO getDataById( Long id ) throws Exception{
         try{
             WeaponFeedBackMapper weaponFeedBackMapper = new WeaponFeedBackMapper();
 
-            Optional<WeaponFeedBack> data = this.weaponFeedBackRepo.findById(id);
+            Optional<WeaponFeedBack> data = this.crudRepo.findById(id);
             if(data.isPresent()){
                 WeaponFeedBackDTO dataDTO = new WeaponFeedBackDTO();
                 dataDTO = weaponFeedBackMapper.entityToDTOMapper(data.get());
@@ -68,13 +68,16 @@ public class WeaponFeedBackService implements WeaponFeedBackServiceInterface{
 
     @Override
     @Transactional
-    public boolean insertWeaponFeedBack( WeaponFeedBack data ) throws Exception{
+    public boolean insertRow( WeaponFeedBackDTO dataDTO ) throws Exception{
         try{
+            WeaponFeedBackMapper mapper = new WeaponFeedBackMapper();
+            WeaponFeedBack data = new WeaponFeedBack();
+            data = mapper.DTOtoEntityMapper(dataDTO);
             if(   data.getWeaponId()!=null && data.getWeaponId()!=null && !data.getUserComment().trim().equals("")   ){
-                if(this.weaponFeedBackRepo.existsByWeaponId(data.getWeaponId()) == false){
-                    if(this.weaponService.isIdOfWeaponExist(data.getWeaponId())){
+                if(this.crudRepo.existsByWeaponId(data.getWeaponId()) == false){
+                    if(this.crudService.isIdOfWeaponExist(data.getWeaponId())){
                         data.setId(null);
-                        this.weaponFeedBackRepo.saveAndFlush(data);
+                        this.crudRepo.saveAndFlush(data);
                         return true;
                     }
                     System.out.println("The linked weapon table does not have a weapon with given weapon id!");
@@ -94,9 +97,9 @@ public class WeaponFeedBackService implements WeaponFeedBackServiceInterface{
     }
 
     @Override
-    public boolean ifWeaponFeedBackExists( Long id ) throws Exception{
+    public boolean ifRowExists( Long id ) throws Exception{
         try{
-            Optional<WeaponFeedBack> list = this.weaponFeedBackRepo.findById(id);
+            Optional<WeaponFeedBack> list = this.crudRepo.findById(id);
             if(   list.isPresent()   )
                 return true;
             return false;
@@ -108,10 +111,13 @@ public class WeaponFeedBackService implements WeaponFeedBackServiceInterface{
 
     @Override
     @Transactional
-    public boolean updateWeaponFeedBack( WeaponFeedBack data ) throws Exception{
+    public boolean updateRow( WeaponFeedBackDTO dataDTO ) throws Exception{
         try{
-            if( ifWeaponFeedBackExists( data.getId() ) ){
-                this.weaponFeedBackRepo.saveAndFlush(data);
+            WeaponFeedBackMapper mapper = new WeaponFeedBackMapper();
+            WeaponFeedBack data = new WeaponFeedBack();
+            data = mapper.DTOtoEntityMapper(dataDTO);
+            if( ifRowExists( data.getId() ) ){
+                this.crudRepo.saveAndFlush(data);
                 return true;
             }
             System.out.println("WeaponFeedBack with given id does not exist!");
@@ -124,10 +130,10 @@ public class WeaponFeedBackService implements WeaponFeedBackServiceInterface{
 
     @Override
     @Transactional
-    public boolean deleteWeaponFeedBack( Long id ) throws Exception{
+    public boolean deleteRow( Long id ) throws Exception{
         try{
-            if( ifWeaponFeedBackExists( id ) ){
-                this.weaponFeedBackRepo.deleteById( id );
+            if( ifRowExists( id ) ){
+                this.crudRepo.deleteById( id );
                 return true;
             }
             System.out.println("WeaponFeedBack with given id does not exist!");
